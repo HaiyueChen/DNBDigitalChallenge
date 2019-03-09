@@ -22,8 +22,12 @@ var remove = function(event) {
 
     var output = document.getElementById('output');
     output.removeAttribute('src');
+
+    document.getElementById('tablegroup').hidden = true;
+    this.jsonres = "";
 }
 
+var jsonres = "";
 var parseImg = async function(files){
     fetch("http://localhost:5000/parseImg", 
         {
@@ -33,9 +37,9 @@ var parseImg = async function(files){
             return res.json();
         }).then(data => {
             if(data.success){
+                this.jsonres = JSON.stringify(data.data);
                 var table = document.getElementById('table');
-                var text =
-                '<tr> <th>Item</th> <th>Price</th> </tr>'
+                var text = '<tr> <th>Item</th> <th>Price</th> </tr>'
 
                 for (var key in data.data) {
                     if (data.data.hasOwnProperty(key)) {
@@ -46,6 +50,23 @@ var parseImg = async function(files){
                     }
                 }
                 table.innerHTML = text;
+                document.getElementById('tablegroup').hidden = false;
             }
         });
+}
+
+var returnJson = function(){
+    if(this.jsonres !== ""){
+        fetch("http://localhost:5000/saveJson", 
+        {
+            method: "POST", 
+            body: this.jsonres
+        }).then(res => {
+            return res.json();
+        }).then(res => {
+            if(res.success){
+                window.location.href = 'index.html';
+            }
+        });
+    }
 }
