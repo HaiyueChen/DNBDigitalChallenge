@@ -50,6 +50,7 @@ def mock_single_month(ids=categ, total_sum=amounts):
         elif ids[i] == "Mat og drikke":
             cat['size'], cat["children"] = mock_mat(total_sum[i])
         else:
+            cat['size'] = total_sum[i]
             cat['children'] = []
         categories.append(cat)
 
