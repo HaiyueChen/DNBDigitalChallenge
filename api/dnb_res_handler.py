@@ -100,4 +100,4 @@ if __name__ == "__main__":
     customer.public_id = jwt_res["customerPublicId"]
     customer.sett_konto(dnb.get_accounts(customer.token))
     trans_bruks = dnb.get_transactions(customer.brukskonto, customer.token, "2018-09-01", "2019-03-08")
-    
+    print(trans_bruks)

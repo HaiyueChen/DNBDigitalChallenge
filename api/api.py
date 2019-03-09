@@ -29,7 +29,8 @@ def main():
 def index():
     return "index"
 
-def 
+def func():
+    pass
 
 
 
