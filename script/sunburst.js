@@ -40,7 +40,7 @@ url => {
 
 
             const g = svg.append("g")
-                .attr("transform", `translate(${width / 3.2}, ${window.innerHeight / 2.6})`)
+                .attr("transform", `translate(${width / 3.3}, ${window.innerHeight / 2.4})`)
                 .style("width", `${width / 3}`)
                 .style("height", `${window.innerHeight / 5}`);
 

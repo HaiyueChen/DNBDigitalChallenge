@@ -41,9 +41,9 @@ def mock_single_month(ids=categ, total_sum=amounts):
         cat = {}
         cat['name'] = ids[i]
         if ids[i] == "Bil og transport":
-            cat["children"] = mock_transport(total_sum[i])
+            cat["children"] = mock_transport()
         elif ids[i] == "Mat og drikke":
-            cat["children"] = mock_mat(total_sum[i])
+            cat["children"] = mock_mat()
         else:
             cat['size'] = total_sum[i]
             cat['children'] = []
@@ -71,7 +71,7 @@ def mock_normal_consumption(ids=categ):
 
     data["name"] = 'categories'
     data['children'] = categories
-    return np.sum(normal_consumption), data
+    return data
 
 
 def mock_year():

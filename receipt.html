@@ -6,9 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script src="./script/receipt.js"></script>
+
+    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./style.css">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
+
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light ">
         <a class="navbar-brand" href="index.html">Money Makers</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -20,32 +30,50 @@
                 </li>
             </ul>
             <span class="navbar-text">
-            Logged in as Liv Ødegård
+            Logged in as Thor Knudsen
             </span>
         </div>
     </nav>
     </br>
-    <div class="container-fluid">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm">
-                    <img id="output" style="max-width: 300px; max-height: 500px; border: none;"/>
-                    <br/>
-                    <input id="input" type="file" accept="image/*" onchange="loadFile(event)">
-                    <button id="remove" class="btn-danger" hidden="hidden" type="button" onclick="remove(event)">Remove image</button>
-                </div>
-                <div class="col-sm">
-                    <img src="static/arrow.jpg" style="max-width: 300px; max-height: 500px; border: none;" alt="left parsed to right"/>
-                </div>
-                <div class="col-sm" hidden="hidden" id="tablegroup">
-                    <div class="form-group">
-                        <table id="table" style="font-size:10px;">
-                        </table>
+    <div class="container-fluid" style="height:100%">
+            <div class="row mt-4" style="height:100%">
+                <div class="col-md-4" id="file-container" style="height: 100%">
+                    <div id="file-card" class="bg-light">
+                        <div id="img-container">
+                            <img id="output" style="max-width: 300px; max-height: 500px; border: none;"/>
+
+                        </div>
+                        <div id="file-input-container">
+                            <input id="file_input" type="file" accept="image/*" onchange="loadFile(event)" style="float:right">
+                            <button id="remove" class="btn-danger" hidden="hidden" type="button" onclick="remove(event)" style="float:right; margin-right:1em;">Remove image</button>
+                        </div>
                     </div>
-                    <button class="btn-success" onclick="returnJson()">Add receipt items</button>
                 </div>
+                <div class="col-md-4">
+                    <div id="arrow-container">
+                        <img src="static/robot.png" style="max-width: 300px; max-height: 500px; border: none;" alt="left parsed to right"/>
+
+                    </div>
+                </div>
+                <div class="col" id="item-colon">
+                    <div class="row">
+                        <div class="col" id="item-card-container">
+                            
+        
+        
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn-success" id="add-receit-button" onclick="returnJson()" >Add receipt items</button>
+                        </div>
+                    </div>
+
+                </div>
+                
             </div>
-        </div>
     </div>
 </body>
 </html>
