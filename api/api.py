@@ -137,7 +137,7 @@ def add_mat_og_drikke(d, json_data):
                 if 'name' in child and child['name'].lower() == 'diverse':
                     d["price"] = d["price"] * 10
                     child['size'] -= d['price']
-                    children['children'].append(d)
+                    children['children'].append({'name' : d[item], 'size' : d['price']})
 
 @app.route('/saveJson', methods=['POST'])
 def saveJson():

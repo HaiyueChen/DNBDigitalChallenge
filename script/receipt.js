@@ -23,7 +23,7 @@ var remove = function (event) {
     var output = document.getElementById('output');
     output.removeAttribute('src');
 
-    document.getElementById('tablegroup').hidden = true;
+    document.getElementById('add-receit-button').hidden = true;
     this.jsonres = "";
 }
 
@@ -61,11 +61,9 @@ var parseImg = async function (files) {
                                 </div>
                             </div>
                             `
-
                     }
                     $("#item-card-container").append(text);
-                    // table.innerHTML = text;
-                    // document.getElementById('tablegroup').hidden = false;
+                    document.getElementById('add-receit-button').hidden = false;
                 }
             }
         });
