@@ -9,26 +9,9 @@ import itertools
 categ = ["Mat og drikke", "Bil og transport","Bolig og fritidsbolig","Ferige og fritid", "Sparing","Faste utgifter","Ikke kategorisert"]
 amounts = [800.00, 3200.00, 15000.00, 2000.00, 0.00, 2000.00, 100.00]
 
-
-
-def mock_transport(total_sum):
+def mock_transport(summ=[2500.0, 0.0, 1000.0, 800.0, 0.0]):
     children = []
     ids = ["Billån", "Verksted og vedlikehold", "Bompenger og parkerings", "Offentlig transport", "Diverse bil transport"]
-    billan = (total_sum-1000.0-800.0)
-    sum = [billan, 0.0, 1000.0, 800.0, 0.0]
-
-    for i in range(len(ids)):
-        cat = {}
-        cat["name"] = ids[i]
-        cat["size"] = sum[i]
-        cat["children"] = []
-        children.append(cat)
-    return np.sum(sum), children
-
-def mock_mat(total_sum=500):
-    children = []
-    ids = ["Kjøtt", "Frukt", "Grønnsaker", "Melkeprodukt", "Smågodt", "Diverse"]
-    summ = [800.0, 200.0, 300.0, 200.0, 400.0, 0.0]
 
     for i in range(len(ids)):
         cat = {}
@@ -36,7 +19,19 @@ def mock_mat(total_sum=500):
         cat["size"] = summ[i]
         cat["children"] = []
         children.append(cat)
-    return np.sum(summ), children
+    return children
+
+def mock_mat(summ=[800.0, 200.0, 300.0, 200.0, 400.0, 0.0]):
+    children = []
+    ids = ["Kjøtt", "Frukt", "Grønnsaker", "Melkeprodukt", "Smågodt", "Diverse"]
+
+    for i in range(len(ids)):
+        cat = {}
+        cat["name"] = ids[i]
+        cat["size"] = summ[i]
+        cat["children"] = []
+        children.append(cat)
+    return children
 
 
 def mock_single_month(ids=categ, total_sum=amounts):
@@ -46,9 +41,9 @@ def mock_single_month(ids=categ, total_sum=amounts):
         cat = {}
         cat['name'] = ids[i]
         if ids[i] == "Bil og transport":
-            cat['size'], cat["children"] = mock_transport(total_sum[i])
+            cat["children"] = mock_transport(total_sum[i])
         elif ids[i] == "Mat og drikke":
-            cat['size'], cat["children"] = mock_mat(total_sum[i])
+            cat["children"] = mock_mat(total_sum[i])
         else:
             cat['size'] = total_sum[i]
             cat['children'] = []
@@ -58,18 +53,25 @@ def mock_single_month(ids=categ, total_sum=amounts):
     data['children'] = categories
     return data
 
-def mock_normal_consumption():
+def mock_normal_consumption(ids=categ):
     normal_consumption = [2000.0, 800.0, 15000.0, 500.0, 2000.0, 1000.0, 100.0]
+    data = {}
+    categories = []
+    for i in range(len(ids)):
+        cat = {}
+        cat['name'] = ids[i]
+        if ids[i] == "Bil og transport":
+            cat["children"] = mock_transport()
+        elif ids[i] == "Mat og drikke":
+            cat["children"] = mock_mat(summ=[300.0, 200.0, 200.0, 200.0, 200.0, 100.0])
+        else:
+            cat['size'] = normal_consumption[i]
+            cat['children'] = []
+        categories.append(cat)
 
-    sizes = []
-    for i in range(len(normal_consumption)):
-        map = {}
-        map["name"] = categ[i]
-        map["size"] = normal_consumption[i]
-        sizes.append(map)
-    return np.sum(normal_consumption), sizes
-
-
+    data["name"] = 'categories'
+    data['children'] = categories
+    return np.sum(normal_consumption), data
 
 
 def mock_year():
