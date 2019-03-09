@@ -94,7 +94,7 @@ def calc_savings():
     if os.path.isfile("./temp.json"):
         f = open("temp.json")
         data = json.load(f)
-        calculate_saving(data)
+        # calculate_saving(data)
         return data
     else:
         return "Error"
