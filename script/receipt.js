@@ -69,20 +69,22 @@ var parseImg = async function (files) {
         });
 }
 
-var returnJson = function(){
-    if(this.jsonres !== ""){
-        fetch("http://localhost:5000/saveJson", 
-        {
-            method: "POST", 
-            body: this.jsonres
-        }).then(res => {
-            return res.json();
-        }).then(res => {
-            if(res.success){
-                window.location.href = 'index.html';
-            }else{
-                console.error(res.description);
-            }
-        });
+var returnJson = function () {
+    if (this.jsonres !== "") {
+        fetch("http://localhost:5000/saveJson",
+            {
+                method: "POST",
+                body: this.jsonres
+            }).then(res => {
+                return res.json();
+            }).then(res => {
+                // if (res.success) {
+                    window.location.href = 'index.html';
+                // }
+            });
     }
+}
+
+const goToIndex = () => {
+    window.location.href = "index.html";
 }
