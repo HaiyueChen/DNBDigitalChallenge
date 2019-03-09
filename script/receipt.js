@@ -48,7 +48,7 @@ var parseImg = async function (files) {
                             <div class="card suggestion-cards bg-light" style="width: 18rem;">
                                 <div class="card-body">
                                     <h5 class="card-title">${item_name}</h5>
-                                    <p class="card-text">kr ${data.data[key]['price']}</p>
+                                    <p class="card-text">Nok ${data.data[key]['price']}</p>
                                 </div>
                             </div>
                             `
@@ -57,13 +57,13 @@ var parseImg = async function (files) {
                             <div class="card suggestion-cards bg-light" style="width: 18rem;">
                                 <div class="card-body">
                                     <h5 class="card-title">${data.data[key]['item']}</h5>
-                                    <p class="card-text">kr ${data.data[key]['price']}</p>
+                                    <p class="card-text">Nok ${data.data[key]['price']}</p>
                                 </div>
                             </div>
                             `
 
                     }
-                    $("#item-colon").append(text);
+                    $("#item-card-container").append(text);
                     // table.innerHTML = text;
                     // document.getElementById('tablegroup').hidden = false;
                 }
