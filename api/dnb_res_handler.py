@@ -17,7 +17,7 @@ class Customer(object):
         self.sparekonto = None
 
 
-    def sett_konto(self, kontolist):
+    def set_account(self, kontolist):
         for konto in kontolist:
             if konto["productName"] == "BRUKSKONTO":
                 self.brukskonto = konto["accountNumber"]
@@ -93,6 +93,8 @@ class Dnb_res_handler(object):
             trans.pop("bookingDate")
             trans.pop("valueDate")
             trans.pop("accountNumber")
+            trans.pop("transactionDate")
+            trans.pop("transactionId")
         for trans in all_transactions:
             if(trans["amount"] < 0):
                 out_going.append(trans)
