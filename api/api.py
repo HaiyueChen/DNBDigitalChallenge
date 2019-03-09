@@ -50,6 +50,14 @@ def func():
     pass
 
 
+@app.route('/parseImg', methods=['POST'])
+def parseImg():
+    if request.method == 'POST':
+        print(request.body)
+
+    return "Success"
+
+
 
 
 if __name__ == "__main__":

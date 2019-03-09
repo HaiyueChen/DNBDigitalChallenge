@@ -10,11 +10,33 @@ headers = {'apikey': '17ef0120425a11e9bba4c5572eb43161'}
 def log_e(errormsg):
     sys.stderr.write(str(errormsg))
 
+
+
 def get_image_data(filename, item_count):
+    """
+    Takes filepath and amount of items bought on receipt as argument
+    Returns dictionary with content:
+    {
+        'success': True/False,
+        'description : 'status-message',
+        
+        'data' : [
+            {
+                'item' : 'item description',
+                'price' : price of item
+            },
+            {
+                'item' : 'item description',
+                'price' : price of item
+            }, 
+            ...
+        ]
+    }
+    """
     for tries in range(10):
         res = parse_receipt(filename, item_count)
         if res['success']:
-            return res['data']
+            return res
         log_e(res['description'])
     raise Exception('Taggun API error')
 
