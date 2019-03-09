@@ -71,7 +71,7 @@ def mock_normal_consumption(ids=categ):
 
     data["name"] = 'categories'
     data['children'] = categories
-    return np.sum(normal_consumption), data
+    return data
 
 
 def mock_year():

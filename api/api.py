@@ -5,13 +5,11 @@ from dnb_res_handler import Dnb_res_handler
 from dnb_res_handler import Customer
 from mock import mock_single_month
 
-# from calculations import calculate_saving
+from calculations import calculate_saving
 
-import ast
 import json
 import os
 from taggun.taggun import *
-import time
 
 app = Flask(__name__)
 CORS(app)
@@ -95,8 +93,7 @@ def calc_savings():
     if os.path.isfile("./temp.json"):
         f = open("temp.json")
         data = json.load(f)
-        # calculate_saving(data)
-        return data
+        return str(calculate_saving(data))
     else:
         return "Error"
 
@@ -114,7 +111,8 @@ def parseImg():
     f = open(filepath, 'wb')
     f.write(data)
     f.close()
-    
+
+
     try:
         data = get_image_data(filepath, item_count+1)
     except Exception as e:
@@ -132,15 +130,6 @@ def parseImg():
     return json.dumps(res)
 
 
-@app.route('/saveJson', methods=['POST'])
-def saveJson():
-    data = request.get_data()
-    print(data)
-
-    #TODO add to json file
-
-    return json.dumps({'success' : True})
-
 # @app.before_request
 # def log_request_info():
 #     app.logger.debug('Headers: %s', request.headers)
@@ -149,6 +138,6 @@ def saveJson():
 
 
 if __name__ == "__main__":
-    # if os.path.isfile("./temp.json"):
-    #     os.remove("./temp.json")
+    if os.path.isfile("./temp.json"):
+        os.remove("./temp.json")
     app.run(host="localhost", debug=True)
