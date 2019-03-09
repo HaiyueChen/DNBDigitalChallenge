@@ -40,7 +40,7 @@ var parseImg = async function(files){
                 this.jsonres = JSON.stringify(data.data);
                 var table = document.getElementById('table');
                 var text = '<tr> <th>Item</th> <th>Price</th> </tr>'
-
+                console.log(jsonres);
                 for (var key in data.data) {
                     if (data.data.hasOwnProperty(key)) {
                         text += '<tr>';
@@ -48,6 +48,7 @@ var parseImg = async function(files){
                         text += '<td align=\"right\">' + data.data[key]['price'] + ' kr</td>';
                         text += '</tr>';
                     }
+                    console.log("tesst");
                 }
                 table.innerHTML = text;
                 document.getElementById('tablegroup').hidden = false;
@@ -66,6 +67,8 @@ var returnJson = function(){
         }).then(res => {
             if(res.success){
                 window.location.href = 'index.html';
+            }else{
+                console.error(res.description);
             }
         });
     }
