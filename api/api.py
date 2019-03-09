@@ -4,6 +4,9 @@ from flask_cors import CORS
 from dnb_res_handler import Dnb_res_handler
 from dnb_res_handler import Customer
 from mock import mock_single_month
+
+from calculations import calculate_saving
+
 import json
 import os
 
@@ -32,9 +35,9 @@ def index():
 
         for trans in trans_bruks:
             # print(trans)
-            if ("Spar" in trans["description"] 
-                or "Coop" in trans["description"] 
-                or "Kiwi" in trans["description"] 
+            if ("Spar" in trans["description"]
+                or "Coop" in trans["description"]
+                or "Kiwi" in trans["description"]
                 or "Rema" in trans["description"]
                 or "Bunnpris" in trans["description"]
                 or "Meny" in trans["description"]):
@@ -66,7 +69,7 @@ def index():
                         if "size" not in cat:
                             cat["size"] = 0.0
                         cat["size"] += abs(float(trans["amount"])) / 3
-        
+
         json_object = {}
         json_object["customerName"] = customer.name
         json_object["konto"] = customer.brukskonto
@@ -89,6 +92,8 @@ def calc_savings():
     if os.path.isfile("./temp.json"):
         f = open("temp.json")
         data = json.load(f)
+        calculate_saving(data)
+        return data
     else:
         return "Error"
 
@@ -104,6 +109,6 @@ def parseImg():
 
 
 if __name__ == "__main__":
-    if os.path.isfile("./temp.json"):
-        os.remove("./temp.json")
+    # if os.path.isfile("./temp.json"):
+    #     os.remove("./temp.json")
     app.run(host="localhost", debug=True)
