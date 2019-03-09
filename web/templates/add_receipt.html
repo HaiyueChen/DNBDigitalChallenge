@@ -1,0 +1,29 @@
+{% extends "navbar.html" %}
+{% block body %}
+{{ super() }}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+    <img id="output" style="max-width: 300px; max-height: 500px; border: none;"/>
+    <br/>
+    <input type="file" accept="image/*" onchange="loadFile(event)">
+        <script>
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+        };
+        </script>
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
