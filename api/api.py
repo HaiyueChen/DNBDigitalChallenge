@@ -5,8 +5,9 @@ from dnb_res_handler import Dnb_res_handler
 from dnb_res_handler import Customer
 from mock import mock_single_month
 
-from calculations import calculate_saving
+# from calculations import calculate_saving
 
+import ast
 import json
 import os
 from taggun.taggun import *
