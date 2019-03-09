@@ -44,13 +44,15 @@
 
                         </div>
                         <div id="file-input-container">
-                            <input id="file_input" type="file" accept="image/*" onchange="loadFile(event)" style="float:right">
+                           
                             <button id="remove" class="btn-danger" hidden="hidden" type="button" onclick="remove(event)" style="float:right; margin-right:1em;">Remove image</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div id="arrow-container">
+                        <input id="file_input" type="file" accept="image/*" onchange="loadFile(event)" style="float:right">
+                        <br/>
                         <img src="static/robot.png" style="max-width: 300px; max-height: 500px; border: none;" alt="left parsed to right"/>
 
                     </div>
@@ -58,16 +60,11 @@
                 <div class="col" id="item-colon">
                     <div class="row">
                         <div class="col" id="item-card-container">
-                            
-        
-        
                         </div>
-
                     </div>
-
                     <div class="row">
                         <div class="col">
-                            <button class="btn-success" id="add-receit-button" onclick="returnJson()" >Add receipt items</button>
+                            <button class="btn-success" id="add-receit-button" hidden="hidden" onclick="returnJson()">Add receipt items</button>
                         </div>
                     </div>
 
