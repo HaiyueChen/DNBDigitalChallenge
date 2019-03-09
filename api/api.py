@@ -30,7 +30,7 @@ def index():
         customer.brukskonto = "12060035404"
         customer.sparekonto = "12038763721"
         #######################################3######
-        print(customer)
+        #print(customer)
         mock_data = mock_single_month()
         trans_bruks = dnb.get_transactions(customer.brukskonto, customer.token, "2018-09-01", "2018-11-20")
 
@@ -129,6 +129,45 @@ def parseImg():
 
     return json.dumps(res)
 
+
+def add_mat_og_drikke(d, json_data):
+    for children in json_data['children']:
+        if 'name' in children and children['name'].lower() == 'mat og drikke':
+            for child in children['children']:
+                if 'name' in child and child['name'].lower() == 'diverse':
+                    child['size'] -= d['price']
+                    children['children'].append(d)
+
+@app.route('/saveJson', methods=['POST'])
+def saveJson():
+    data = request.get_data()
+    data = json.loads(data)
+    print(data)
+
+    if not os.path.isfile("./temp.json"):
+        return json.dumps({'success' : False, 'description' : 'Unable to find temp.json'})    
+
+    f = open("temp.json")
+    json_data = json.load(f)
+    
+
+    for d in data:
+        print("sdfsdfdsf", d)
+        if('item' in d and 'cola' in d['item'].lower()):
+            add_mat_og_drikke(d, json_data)
+                            
+        if('item' in d and 'plommer' in d['item'].lower()):
+            add_mat_og_drikke(d, json_data)
+
+        if('item' in d and 'mellombar' in d['item'].lower()):
+            add_mat_og_drikke(d, json_data)
+
+    os.remove("./temp.json")
+    f = open("temp.json", "w")
+    f.write(json.dumps(json_data))
+    f.close()
+
+    return json.dumps({'success' : True})
 
 # @app.before_request
 # def log_request_info():
