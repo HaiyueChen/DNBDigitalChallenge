@@ -2,7 +2,7 @@ var loadFile = function(event) {
     console.log(event.target.files);
     this.parseImg(event.target.files);
 
-    var input = document.getElementById('input');
+    var input = document.getElementById('file_input');
     input.hidden = true;
     
     var remove = document.getElementById('remove');
@@ -13,7 +13,7 @@ var loadFile = function(event) {
 };
 
 var remove = function(event) {
-    var input = document.getElementById('input');
+    var input = document.getElementById('file_input');
     input.value='';
     input.hidden = false;
 

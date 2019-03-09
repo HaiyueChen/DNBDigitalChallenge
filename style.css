@@ -54,3 +54,40 @@ html, body {
 #graph-container:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
+
+#file-card {
+    /* background-color: bisque; */
+    height: 550px;
+    width: 350px;
+    margin-top: 5em;
+    margin-left: 10em;
+    padding-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+#img-container {
+    /* background-color:cadetblue; */
+    height: 500px;
+    width: 350px;
+}
+
+#output {
+    margin-left: 1.5em;
+    margin-top: 3em;
+}
+
+#file-input-container {
+    /* background-color: blueviolet; */
+    float: right;
+}
+
+#arrow-container {
+    margin-left: 9em;
+    margin-top: 15em;
+}
+
+#item-card {
+    height: 200px;
+}
