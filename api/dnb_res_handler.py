@@ -83,9 +83,21 @@ class Dnb_res_handler(object):
         all_transactions_res = self.request_handler.get_request(
             path=transactions_path, params=time_interval, api_token=token
         )
-        print(all_transactions_res)
-        all_transactions = all_transactions_res.json()
-        return all_transactions
+        # print(all_transactions_res)
+        all_transactions = all_transactions_res.json()["transactions"]
+        out_going = []
+        for trans in all_transactions:
+            trans.pop("externalReference")
+            trans.pop("textLines")
+            trans.pop("details")  
+            trans.pop("bookingDate")
+            trans.pop("valueDate")
+            trans.pop("accountNumber")
+        for trans in all_transactions:
+            if(trans["amount"] < 0):
+                out_going.append(trans)
+
+        return out_going
 
 
 if __name__ == "__main__":
@@ -99,5 +111,6 @@ if __name__ == "__main__":
     customer.token = jwt_res["jwtToken"]
     customer.public_id = jwt_res["customerPublicId"]
     customer.sett_konto(dnb.get_accounts(customer.token))
-    trans_bruks = dnb.get_transactions(customer.brukskonto, customer.token, "2018-09-01", "2019-03-08")
-    print(trans_bruks)
+    trans_bruks = dnb.get_transactions(customer.brukskonto, customer.token, "2018-03-09", "2019-03-08")
+    for trans in trans_bruks:
+        print(trans)
