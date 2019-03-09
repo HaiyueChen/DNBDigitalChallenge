@@ -1,6 +1,7 @@
 import numpy as np
 import json
 import urllib
+import itertools
 
 
 # Use mock_singl_month
@@ -8,9 +9,11 @@ import urllib
 categ = ["Mat og drikke", "Bil og transport","Bolig og fritidsbolig","Ferige og fritid", "Sparing","Faste utgifter","Ikke kategorisert"]
 amounts = [800.00, 3200.00, 15000.00, 2000.00, 0.00, 2000.00, 100.00]
 
+
+
 def mock_transport(total_sum):
     children = []
-    ids = ["Billån", "Verksted og vedlikehold", "Bompenger og perkerings avgifter", "Offentlig transport", "Diverse bil transport"]
+    ids = ["Billån", "Verksted og vedlikehold", "Bompenger og parkerings", "Offentlig transport", "Diverse bil transport"]
     billan = (total_sum-1000.0-800.0)
     sum = [billan, 0.0, 1000.0, 800.0, 0.0]
 
@@ -53,6 +56,20 @@ def mock_single_month(ids=categ, total_sum=amounts):
     data["name"] = 'categories'
     data['children'] = categories
     return data
+
+def mock_normal_consumption():
+    normal_consumption = [2000.0, 800.0, 15000.0, 500.0, 2000.0, 1000.0, 100.0]
+
+    sizes = []
+    for i in range(len(normal_consumption)):
+        map = {}
+        map["name"] = categ[i]
+        map["size"] = normal_consumption[i]
+        sizes.append(map)
+    print("WHAT IS THIS SHIT",sizes)
+    return np.sum(normal_consumtion), sizes
+
+
 
 
 def mock_year():
