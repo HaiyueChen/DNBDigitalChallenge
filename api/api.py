@@ -124,7 +124,7 @@ def parseImg():
     for d in data['data']:
         if item_count <= 0:
             break
-        res['data'].append({'item' : d['item'], 'price' : d['price']})
+        res['data'].append({'item' : d['item'], 'size' : d['price']})
         item_count -= 1
 
     return json.dumps(res)
@@ -135,6 +135,7 @@ def add_mat_og_drikke(d, json_data):
         if 'name' in children and children['name'].lower() == 'mat og drikke':
             for child in children['children']:
                 if 'name' in child and child['name'].lower() == 'diverse':
+                    d["price"] = d["price"] * 10
                     child['size'] -= d['price']
                     children['children'].append(d)
 

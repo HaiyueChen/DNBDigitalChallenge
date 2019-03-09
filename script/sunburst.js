@@ -4,8 +4,10 @@ url => {
     d3.json(url,
         (error, data) => {
             if (error) throw error;
-            console.log(data);
-
+            console.log(data);            
+            if(d3.select("#graph-svg")["_groups"][0][0] != null){
+                $("#graph-svg").remove();
+            }
             let width = window.innerWidth;
             let radius = width / 12;
 

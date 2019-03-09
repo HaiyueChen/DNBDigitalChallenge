@@ -1,5 +1,5 @@
 const fetch_change = () => {
-    
+
 
 
 }
@@ -14,7 +14,7 @@ $(document).ready(
             selectOtherMonths: true
         });
 
-        // fetch_index();
+        
         draw_graph("http://localhost:5000");
     }
 )
