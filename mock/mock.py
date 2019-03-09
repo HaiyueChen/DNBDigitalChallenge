@@ -2,7 +2,10 @@ import numpy as np
 import json
 import urllib
 
-categ = ["Mat og drikke", "Bil og transport","Bolig og fritidsbolig","Ferige og fritid",  "Sparing","Øvrige utgifter","Ikke kategorisert"]
+
+# Use mock_singl_month
+
+categ = ["Mat og drikke", "Bil og transport","Bolig og fritidsbolig","Ferige og fritid", "Sparing","Øvrige utgifter","Ikke kategorisert"]
 amounts = [6000.00, 3200.00, 15000.00, 2000.00, 0.00, 2000.00, 100.00]
 
 def mock_transport(total_sum):
@@ -13,83 +16,45 @@ def mock_transport(total_sum):
 
     for i in range(len(ids)):
         cat = {}
-        cat["id"] = ids[i]
-        cat["sum"] = sum[i]
+        cat["name"] = ids[i]
+        cat["size"] = sum[i]
         cat["children"] = []
         children.append(cat)
-    return children
+    return np.sum(sum), children
+
+def mock_mat(total_sum=3000):
+    children = []
+    ids = ["Kjøtt", "Frukt", "Grønnsaker", "Melkeprodukt", "Smågodt", "Diverse"]
+    sum = [total_sum, total_sum-100, total_sum-500.0, total_sum-200.0, total_sum-600.0, total_sum-200.0]
+
+    for i in range(len(ids)):
+        cat = {}
+        cat["name"] = ids[i]
+        cat["size"] = sum[i]
+        cat["children"] = []
+        children.append(cat)
+    return np.sum(sum), children
 
 
-def mock_data(ids, total_sum):
-    months = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun","Jul","Aug", "Sep", "Okt","Nov","Des"]
+def mock_single_month(ids=categ, total_sum=amounts):
     data = {}
+    categories = []
+    for i in range(len(ids)):
+        cat = {}
+        cat['name'] = ids[i]
+        if ids[i] == "Bil og transport":
+            cat['size'], cat["children"] = mock_transport(total_sum[i])
+        elif ids[i] == "Mat og drikke":
+            cat['size'], cat["children"] = mock_mat(total_sum[i])
+        else:
+            cat['children'] = []
+        categories.append(cat)
 
-    v = 0
-    for month in months:
-        categories = []
-        for i in range(len(ids)):
-            cat = {}
-            cat['id'] = ids[i]
-            cat['sum'] = total_sum[i]
-            if ids[i] == "Bil og transport":
-                print("Bil")
-                cat["children"] = mock_transport(total_sum[i])
-            else:
-                cat['children'] = []
-                categories.append(cat)
-                data[month] = {"categories": categories}
-
+    data["name"] = 'categories'
+    data['children'] = categories
     return data
 
-mock_data(categ, amounts)
-# print(mock_data(categ, amounts))
 
-# data = {
-#     "categories": [{
-#         "id": "Mat og drikke",
-#         "sum": 0.00,
-#         "children": {}},
-#         {"id": "Bil og transport",
-#         "sum": 0.00,
-#         "children": [{
-#                 "id": "Bil lan",
-#                 "sum": 0.00
-#             },
-#             {
-#                 "id": "Verksted og vedlikehold",
-#                 "sum": 0.00
-#             },
-#             {
-#                 "id": "bompenger og parkerings avgifter",
-#                 "sum": 0.00
-#             },
-#             {
-#                 "id": "Offentlig transport",
-#                 "sum": 0.00
-#             },
-#             {
-#                 "id": "Diverse bil transport",
-#                 "sum": 0.00
-#             },
-#         ],
-#         {"id": "Bolig og fritidsbolig",
-#         "sum": 0.00,
-#         "children": {}},
-#         {"id": "Ferige og fritid",
-#         "sum": 0.00,
-#         "children": {}},
-#         {"id": "Sparing",
-#         "sum": 0.00,
-#         "children": {}},
-#         {"id": "Øvrige utgifter",
-#         "sum": 0.00,
-#         "children": {}},
-#         {"id": "Ikke kategorisert",
-#         "sum": 0.00,
-#         "children": {}},
-#     ],
-#
-# }
-#
-# with open('consumption.json') as json_file:
-#     data json.load(json_file)
+def mock_year():
+    months = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun","Jul","Aug", "Sep", "Okt","Nov","Des"]
+    pass
