@@ -149,6 +149,6 @@ def saveJson():
 
 
 if __name__ == "__main__":
-    # if os.path.isfile("./temp.json"):
-    #     os.remove("./temp.json")
+    if os.path.isfile("./temp.json"):
+         os.remove("./temp.json")
     app.run(host="localhost", debug=True)

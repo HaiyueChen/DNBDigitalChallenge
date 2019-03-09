@@ -1,10 +1,10 @@
-var loadFile = function(event) {
+var loadFile = function (event) {
     console.log(event.target.files);
     this.parseImg(event.target.files);
 
     var input = document.getElementById('file_input');
     input.hidden = true;
-    
+
     var remove = document.getElementById('remove');
     remove.hidden = false;
 
@@ -12,9 +12,9 @@ var loadFile = function(event) {
     output.src = URL.createObjectURL(event.target.files[0]);
 };
 
-var remove = function(event) {
+var remove = function (event) {
     var input = document.getElementById('file_input');
-    input.value='';
+    input.value = '';
     input.hidden = false;
 
     var remove = document.getElementById('remove');
@@ -28,45 +28,61 @@ var remove = function(event) {
 }
 
 var jsonres = "";
-var parseImg = async function(files){
-    fetch("http://localhost:5000/parseImg", 
+var parseImg = async function (files) {
+    fetch("http://localhost:5000/parseImg",
         {
-            method: "POST", 
+            method: "POST",
             body: files[0]
         }).then(res => {
             return res.json();
         }).then(data => {
-            if(data.success){
+            if (data.success) {
                 this.jsonres = JSON.stringify(data.data);
-                var table = document.getElementById('table');
-                var text = '<tr> <th>Item</th> <th>Price</th> </tr>'
-
+                // var colon = document.getElementById('item-colon');
                 for (var key in data.data) {
-                    if (data.data.hasOwnProperty(key)) {
-                        text += '<tr>';
-                        text += '<td>' + data.data[key]['item'] + '</td>';
-                        text += '<td align=\"right\">' + data.data[key]['price'] + ' kr</td>';
-                        text += '</tr>';
+                    console.log(key);
+                    if (data.data[key]["item"].includes("PLOMMER")) {
+
+                        let item_name = "Plommer 0.100kg x kr 49,00";
+                        var text = `
+                            <div class="card suggestion-cards bg-light" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">${item_name}</h5>
+                                    <p class="card-text">kr ${data.data[key]['price']}</p>
+                                </div>
+                            </div>
+                            `
+                    } else {
+                        var text = `
+                            <div class="card suggestion-cards bg-light" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">${data.data[key]['item']}</h5>
+                                    <p class="card-text">kr ${data.data[key]['price']}</p>
+                                </div>
+                            </div>
+                            `
+
                     }
+                    $("#item-colon").append(text);
+                    // table.innerHTML = text;
+                    // document.getElementById('tablegroup').hidden = false;
                 }
-                table.innerHTML = text;
-                document.getElementById('tablegroup').hidden = false;
             }
         });
 }
 
-var returnJson = function(){
-    if(this.jsonres !== ""){
-        fetch("http://localhost:5000/saveJson", 
-        {
-            method: "POST", 
-            body: this.jsonres
-        }).then(res => {
-            return res.json();
-        }).then(res => {
-            if(res.success){
-                window.location.href = 'index.html';
-            }
-        });
+var returnJson = function () {
+    if (this.jsonres !== "") {
+        fetch("http://localhost:5000/saveJson",
+            {
+                method: "POST",
+                body: this.jsonres
+            }).then(res => {
+                return res.json();
+            }).then(res => {
+                if (res.success) {
+                    window.location.href = 'index.html';
+                }
+            });
     }
 }
