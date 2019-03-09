@@ -11,6 +11,7 @@ import ast
 import json
 import os
 from taggun.taggun import *
+import time
 
 app = Flask(__name__)
 CORS(app)
@@ -113,8 +114,7 @@ def parseImg():
     f = open(filepath, 'wb')
     f.write(data)
     f.close()
-
-
+    
     try:
         data = get_image_data(filepath, item_count+1)
     except Exception as e:
@@ -131,6 +131,15 @@ def parseImg():
 
     return json.dumps(res)
 
+
+@app.route('/saveJson', methods=['POST'])
+def saveJson():
+    data = request.get_data()
+    print(data)
+
+    #TODO add to json file
+
+    return json.dumps({'success' : True})
 
 # @app.before_request
 # def log_request_info():
