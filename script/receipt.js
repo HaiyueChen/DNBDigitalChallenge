@@ -1,4 +1,5 @@
 var loadFile = function(event) {
+    console.log(event.target.files);
     this.parseImg(event.target.files);
 
     var input = document.getElementById('input');
@@ -24,7 +25,27 @@ var remove = function(event) {
 }
 
 var parseImg = async function(files){
-    fetch("http://localhost:5000/parseImg", {method: 'POST', body: JSON.stringify(files[0])}).then(res => {
-        console.log(res);
-    })
+    fetch("http://localhost:5000/parseImg", 
+        {
+            method: "POST", 
+            body: files[0]
+        }).then(res => {
+            return res.json();
+        }).then(data => {
+            if(data.success){
+                var table = document.getElementById('table');
+                var text =
+                '<tr> <th>Item</th> <th>Price</th> </tr>'
+
+                for (var key in data.data) {
+                    if (data.data.hasOwnProperty(key)) {
+                        text += '<tr>';
+                        text += '<td>' + data.data[key]['item'] + '</td>';
+                        text += '<td align=\"right\">' + data.data[key]['price'] + ' kr</td>';
+                        text += '</tr>';
+                    }
+                }
+                table.innerHTML = text;
+            }
+        });
 }

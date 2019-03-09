@@ -1,0 +1,56 @@
+nav {
+    background-color: rgba(55, 189, 215, 0.28);
+
+}
+
+html, body {
+    height: 100%
+}
+
+#input-card {
+    margin-top: 3.5em;
+    margin-left: 2em;
+    padding-top: 2em;
+    padding-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+#input-card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.label-container {
+    background-color:rgba(183, 196, 204, 0.45);
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-left: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.suggestion-cards {
+    margin-left: 2em;
+    margin-top:0.5em;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.suggestion-cards:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+#graph-container {
+    height: 850px;
+    width: 80%;
+    border-radius: 10px;
+    margin-top: 3em;
+    margin-left: 4em;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+#graph-container:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}

@@ -9,6 +9,7 @@ from calculations import calculate_saving
 
 import json
 import os
+from taggun.taggun import *
 
 app = Flask(__name__)
 CORS(app)
@@ -100,11 +101,40 @@ def calc_savings():
 
 @app.route('/parseImg', methods=['POST'])
 def parseImg():
-    if request.method == 'POST':
-        print(request.body)
+    data = request.get_data()
 
-    return "Success"
 
+    filepath = 'taggun/kvittering.jpg'
+    item_count = 3
+
+    if os.path.exists(filepath):
+        os.remove(filepath)
+    f = open(filepath, 'wb')
+    f.write(data)
+    f.close()
+
+
+    try:
+        data = get_image_data(filepath, item_count+1)
+    except Exception as e:
+        return {'success' : False, 'description' : str(e)}
+
+
+    res = {'success' : True, 'data' : []}
+
+    for d in data['data']:
+        if item_count <= 0:
+            break
+        res['data'].append({'item' : d['item'], 'price' : d['price']})
+        item_count -= 1
+
+    return json.dumps(res)
+
+
+# @app.before_request
+# def log_request_info():
+#     app.logger.debug('Headers: %s', request.headers)
+#     app.logger.debug('Body: %s', request.get_data(as_text=True))
 
 
 

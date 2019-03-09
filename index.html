@@ -2,14 +2,20 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>DNB Hackathon</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./style.css">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src = "https://d3js.org/d3.v4.min.js"></script>
     <script src="./script/index.js"></script>
+    <script src="./script/sunburst.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="index.html">Money Makers</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -20,14 +26,73 @@
                     <a class="nav-link" href="receipt.html">Add receipt<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
-            <span class="navbar-text">
-            Logged in as Liv Ødegård
+            <span class="navbar-text" id="login-name">
+            Logged in as ----- ----
             </span>
         </div>
     </nav>
-    </br>
-    <div class="container-fluid">
-        test
+    <div class="container-fluid" style="height:100%;">
+
+        <div class="row" style="height:100%">
+            <div class="col-md-3" style="height:100;">
+            <h2 style="margin-left:1.15em; margin-top:1.5em">Save money!</h2>
+
+                <div id="input-card" class="row border-secondary bg-light">
+                    <div class="col">
+                        <div class="form-group">
+                            <div class="label-container">
+                                <label for="saving-amount">How much do you want to save?</label>
+                            </div>
+                            <input type="number" class="form-control" id="saving-amount" placeholder="1000kr">
+                        </div>
+                        <div class="form-group">
+                            <div class="label-container">
+                                <label for="saving-due-date">When do you want to reach your goal?</label>
+                            </div>
+                            <input type="text" class="form-control" id="saving-due-date" placeholder="TODAY!">
+                        </div>
+                        <button style="float:right;" type="button" class="btn btn-primary btn-lg">Large button</button>
+                    </div>
+                </div>
+                
+                <div id="suggestion-container" class="row mt-4">
+                    <div class="col">
+                        <div class="card suggestion-cards bg-light" style="width: 18rem;">
+                            <div class="card-body">
+                              <h5 class="card-title">Food and drinks</h5>
+                              <p class="card-text">minus 500kr</p>
+                            </div>
+                        </div>
+
+                        <div class="card suggestion-cards bg-light" style="width: 18rem;">
+                            <div class="card-body">
+                              <h5 class="card-title">Food and drinks</h5>
+                              <p class="card-text">minus 500kr</p>
+                            </div>
+                        </div>
+                        <div class="card suggestion-cards bg-light" style="width: 18rem;">
+                            <div class="card-body">
+                              <h5 class="card-title">Food and drinks</h5>
+                              <p class="card-text">minus 500kr</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-9 ">
+                <div id="graph-container" class="bg-light">
+
+
+
+                </div>
+
+            </div>
+
+
+
+        </div>
     </div>
 </body>
 </html>

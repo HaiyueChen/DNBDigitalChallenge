@@ -4,10 +4,10 @@ url => {
     d3.json(url,
         (error, data) => {
             if (error) throw error;
-            //console.log(data);
+            console.log(data);
 
             let width = window.innerWidth;
-            let radius = window.innerHeight / 8;
+            let radius = width / 12;
 
             let arc = d3.arc()
                 .startAngle(d => d.x0)
@@ -30,7 +30,7 @@ url => {
 
             const root = partition(data);
 
-            d3.select("#graph").append("svg").attr("id", "graph-svg");
+            d3.select("#graph-container").append("svg").attr("id", "graph-svg");
             root.each(d => d.current = d);
             const svg = d3.select("#graph-svg")
                 .style("width", "100%")
@@ -40,7 +40,7 @@ url => {
 
 
             const g = svg.append("g")
-                .attr("transform", `translate(${width / 2.8}, ${window.innerHeight / 2})`)
+                .attr("transform", `translate(${width / 3.2}, ${window.innerHeight / 2.6})`)
                 .style("width", `${width / 3}`)
                 .style("height", `${window.innerHeight / 5}`);
 
@@ -61,19 +61,10 @@ url => {
                     return !d.children;
                 }
             )
-                .style("cursor", "pointer")
-                .on("click",
-                    element => {
-                        if (arcVisible(element.current)) {
-                            window.open(`http://bugs.opoint.com/show_bug.cgi?id=${element.data.name}`, "_blank")
-                        }
-                    }
-                )
 
 
             path.append("title")
-                .text(d => `${d.data.average_badness}`);
-                //.text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
+                .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
 
             const label = g.append("g")
                 .attr("pointer-events", "none")
@@ -85,7 +76,8 @@ url => {
                 .attr("dy", "0.4em")
                 .attr("fill-opacity", d => +labelVisible(d.current))
                 .attr("transform", d => labelTransform(d.current))
-                .text(d => d.data.name);
+                .text(d => d.data.name)
+                .style("font-size", "12px");
 
 
             const parent = g.append("circle")
