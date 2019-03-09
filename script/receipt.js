@@ -80,9 +80,13 @@ var returnJson = function () {
             }).then(res => {
                 return res.json();
             }).then(res => {
-                if (res.success) {
+                // if (res.success) {
                     window.location.href = 'index.html';
-                }
+                // }
             });
     }
+}
+
+const goToIndex = () => {
+    window.location.href = "index.html";
 }
