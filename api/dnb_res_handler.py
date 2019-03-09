@@ -78,7 +78,7 @@ class Dnb_res_handler(object):
     def get_transactions(self, accountNumber, token, from_date, to_date):
         transactions_path = "/transactions/%s" % accountNumber
         time_interval = {"fromDate" : from_date, "toDate" : to_date}
-        print(time_interval)
+        # print(time_interval)
         
         all_transactions_res = self.request_handler.get_request(
             path=transactions_path, params=time_interval, api_token=token

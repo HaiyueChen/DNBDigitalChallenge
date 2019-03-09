@@ -26,9 +26,47 @@ def index():
     #######################################3######
     print(customer)
     mock_data = mock_single_month()
-    trans_bruks = dnb.get_transactions(customer.brukskonto, customer.token, "2018-03-09", "2019-03-08")
-    # for trans in trans_bruks:
-        # print(trans)
+    trans_bruks = dnb.get_transactions(customer.brukskonto, customer.token, "2018-09-01", "2018-11-20")
+    
+    for trans in trans_bruks:
+        print(trans)
+        if ("Spar" in trans["description"] 
+            or "Coop" in trans["description"] 
+            or "Kiwi" in trans["description"] 
+            or "Rema" in trans["description"]
+            or "Bunnpris" in trans["description"]
+            or "Meny" in trans["description"]):
+            for cat in mock_data["children"]:
+                if cat["name"] == "Mat og drikke":
+                    for under_cat in cat["children"]:
+                        if under_cat["name"] == "Diverse":
+                            under_cat["size"] += abs(float(trans["amount"])) / 3
+                            break
+        elif ("HBO" in trans["description"]
+                or "Olivia" in trans["description"]
+                or "Kondomeriet" in trans["description"]):
+            for cat in mock_data["children"]:
+                if cat["name"] == "Ferige og fritid":
+                    cat["size"] = abs(float(trans["amount"]))
+                    break
+        elif ("Bohus" in trans["description"]):
+            for cat in mock_data["children"]:
+                if cat["name"] == "Ikke kategorisert":
+                    #print(cat["size"])
+                    if("size" not in cat):
+                        cat["size"] = 0
+                    cat["size"] = abs(float(trans["amount"]))
+                    break
+        elif ("Rentebetalinger" in trans["description"]
+                or "Avtalegiro" in trans["description"]):
+            for cat in mock_data["children"]:
+                if cat["name"] == "Faste utgifter":
+                    if "size" not in cat:
+                        cat["size"] = 0.0
+                    cat["size"] += abs(float(trans["amount"])) / 3
+        
+        
+        # "Mat og drikke", "Bil og transport","Bolig og fritidsbolig","Ferige og fritid", "Sparing","Øvrige utgifter","Ikke kategorisert"
     
     
     
@@ -36,7 +74,7 @@ def index():
     json_object["customerName"] = customer.name
     json_object["konto"] = customer.brukskonto
     json_object["token"] = customer.token
-    return json.dumps(mock_single_month())
+    return json.dumps(mock_data)
 
 def func():
     pass
