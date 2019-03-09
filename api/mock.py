@@ -66,8 +66,7 @@ def mock_normal_consumption():
         map["name"] = categ[i]
         map["size"] = normal_consumption[i]
         sizes.append(map)
-    print("WHAT IS THIS SHIT",sizes)
-    return np.sum(normal_consumtion), sizes
+    return np.sum(normal_consumption), sizes
 
 
 
