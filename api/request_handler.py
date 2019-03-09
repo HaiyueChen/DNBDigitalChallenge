@@ -36,4 +36,5 @@ class RequestHandler(object):
             headers["x-dnbapi-jwt"] = api_token
 
         request_url = self.__endpoint + path + "?" + canonical_querystring
+        print(request_url)
         return requests.get(request_url, headers=headers)
