@@ -20,7 +20,7 @@ def calculate_saving(data):
                 habbits = compare_spending_habits(name, normal["children"], categories[i]["children"])
                 possible_saving.append(habbits)
                 break
-    print("\n\nPossible saving",possible_saving)
+    # print("\n\nPossible saving",possible_saving)
     return possible_saving
 
 def compare_spending_habits(category_name, normal_spending, customer_spending):
@@ -59,7 +59,7 @@ def total_consumption(data):
 
 
 
-    print(category["name"])
+    # print(category["name"])
     spendings += category["size"]
-    print("total spending:",spendings)
+    # print("total spending:",spendings)
     return spendings
