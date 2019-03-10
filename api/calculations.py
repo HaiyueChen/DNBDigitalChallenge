@@ -51,6 +51,16 @@ def compare_spending_habits(category_name, normal_spending, customer_spending):
         else:
             possible_saving["size"] = 0.0
 
+        for j in range(len(normal_spending)):
+            if customer_spending[i]["name"] == normal_spending[j]["name"]:
+                cat["name"] = customer_spending[i]["name"]
+                if customer_spending[i]["size"] > normal_spending[j]["size"]:
+                    # print("PRINT DIF",customer_spending[i]["size"], normal_spending[j]["size"])
+                    cat["size"] = abs(round(customer_spending[i]["size"]-normal_spending[j]["size"], 2))
+                else:
+                    cat["size"] = 0.0
+                children.append(cat)
+                break
 
     possible_saving["name"] = category_name
     possible_saving["children"] = children
@@ -66,6 +76,7 @@ def total_consumption(data):
     for i in range(len(categories)):
         category = categories[i]
         if not category["children"]:
+            # print(category["size"])
             spendings += category["size"]
         else:
             sub_category = category["children"]
