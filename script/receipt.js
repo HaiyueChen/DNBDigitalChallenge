@@ -40,7 +40,7 @@ var parseImg = async function (files) {
                 this.jsonres = JSON.stringify(data.data);
                 // var colon = document.getElementById('item-colon');
                 for (var key in data.data) {
-                    console.log(key);
+                    console.log(data.data);
                     if (data.data[key]["item"].includes("PLOMMER")) {
 
                         let item_name = "Plommer 0.100kg x kr 49,00";
@@ -48,7 +48,7 @@ var parseImg = async function (files) {
                             <div class="card suggestion-cards bg-light" style="width: 18rem;">
                                 <div class="card-body">
                                     <h5 class="card-title">${item_name}</h5>
-                                    <p class="card-text">Nok ${data.data[key]['price']}</p>
+                                    <p class="card-text">Nok ${data.data[key]['size']}</p>
                                 </div>
                             </div>
                             `
@@ -57,7 +57,7 @@ var parseImg = async function (files) {
                             <div class="card suggestion-cards bg-light" style="width: 18rem;">
                                 <div class="card-body">
                                     <h5 class="card-title">${data.data[key]['item']}</h5>
-                                    <p class="card-text">Nok ${data.data[key]['price']}</p>
+                                    <p class="card-text">Nok ${data.data[key]['size']}</p>
                                 </div>
                             </div>
                             `
@@ -78,9 +78,10 @@ var returnJson = function () {
             }).then(res => {
                 return res.json();
             }).then(res => {
-                // if (res.success) {
+                console.log(res);
+                if (res.success) {
                     window.location.href = 'index.html';
-                // }
+                }
             });
     }
 }

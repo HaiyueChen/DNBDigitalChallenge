@@ -1,15 +1,18 @@
 from flask import Flask
 from flask import request
 from flask_cors import CORS
-from dnb_res_handler import Dnb_res_handler
-from dnb_res_handler import Customer
-from mock import mock_single_month
-
-from calculations import calculate_saving
 
 import json
 import os
+from datetime import datetime
+from datetime import timedelta
 from taggun.taggun import *
+
+from dnb_res_handler import Dnb_res_handler
+from dnb_res_handler import Customer
+from mock import mock_single_month
+from calculations import calculate_saving
+
 
 app = Flask(__name__)
 CORS(app)
@@ -93,7 +96,18 @@ def calc_savings():
     if os.path.isfile("./temp.json"):
         f = open("temp.json")
         data = json.load(f)
-        return str(calculate_saving(data))
+        amount = float(request.args.get("amount"))
+        date_string = request.args.get("date")
+        print(amount, date_string)
+
+        date_format =  "%m/%d/%Y"
+        due_date = datetime.strptime(date_string, date_format)
+        now = datetime.now()
+        nr_of_dates =  (due_date - now) /  timedelta(days=1)       
+        print(int(nr_of_dates))
+        
+        
+        return json.dumps(calculate_saving(data, amount, int(nr_of_dates)))
     else:
         return "Error"
 
@@ -112,7 +126,6 @@ def parseImg():
     f.write(data)
     f.close()
 
-
     try:
         data = get_image_data(filepath, item_count+1)
     except Exception as e:
@@ -124,7 +137,7 @@ def parseImg():
     for d in data['data']:
         if item_count <= 0:
             break
-        res['data'].append({'item' : d['item'], 'price' : d['price']})
+        res['data'].append({'item' : d['item'], 'size' : d['price']})
         item_count -= 1
 
     return json.dumps(res)
@@ -135,14 +148,15 @@ def add_mat_og_drikke(d, json_data):
         if 'name' in children and children['name'].lower() == 'mat og drikke':
             for child in children['children']:
                 if 'name' in child and child['name'].lower() == 'diverse':
-                    child['size'] -= d['price']
-                    children['children'].append({'name' : d['item'], 'size' : d['price']})
+                    d["size"] = d["size"] * 10
+                    child['size'] -= d['size']
+                    children['children'].append({'name' : d['item'], 'size' : d['size']})
 
 @app.route('/saveJson', methods=['POST'])
 def saveJson():
     data = request.get_data()
     data = json.loads(data)
-    print(data)
+    # print(data)
 
     if not os.path.isfile("./temp.json"):
         return json.dumps({'success' : False, 'description' : 'Unable to find temp.json'})    
