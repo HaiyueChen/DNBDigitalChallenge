@@ -23,7 +23,9 @@ var remove = function (event) {
     var output = document.getElementById('output');
     output.removeAttribute('src');
 
-    document.getElementById('add-receit-button').hidden = true;
+    document.getElementById('add-receipt-button').hidden = true;
+    document.getElementById('file-card').hidden = true;
+    $("#item-card-container").empty();
     this.jsonres = "";
 }
 
@@ -63,7 +65,8 @@ var parseImg = async function (files) {
                             `
                     }
                     $("#item-card-container").append(text);
-                    document.getElementById('add-receit-button').hidden = false;
+                    document.getElementById('file-card').hidden = false;
+                    document.getElementById('add-receipt-button').hidden = false;
                 }
             }
         });
