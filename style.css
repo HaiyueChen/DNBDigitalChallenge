@@ -105,3 +105,18 @@ html, body {
     margin-top: 2em;
     margin-left: 10em;
 }
+
+.loader {
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite blinker;
+  }
+  
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

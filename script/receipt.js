@@ -31,6 +31,7 @@ var remove = function (event) {
 
 var jsonres = "";
 var parseImg = async function (files) {
+    $('#robot').addClass('loader');
     fetch("http://localhost:5000/parseImg",
         {
             method: "POST",
@@ -64,6 +65,7 @@ var parseImg = async function (files) {
                             </div>
                             `
                     }
+                    $('#robot').removeClass('loader');
                     $("#item-card-container").append(text);
                     document.getElementById('file-card').hidden = false;
                     document.getElementById('add-receipt-button').hidden = false;

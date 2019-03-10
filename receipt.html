@@ -36,6 +36,7 @@
     </nav>
     </br>
     <div class="container-fluid" style="height:100%">
+        <div class="loader"></div>
             <div class="row mt-4" style="height:100%">
                 <div class="col-md-4" id="file-container" style="height: 100%">
                     <div id="file-card" class="bg-light" hidden="hidden">
@@ -52,7 +53,7 @@
                         <input id="file_input" type="file" accept="image/*" style="display:none;" onchange="loadFile(event)">
                         <input type="button" style="margin-left:60px;margin-bottom:50px;" value="Add receipt" onclick="document.getElementById('file_input').click();" />
                         <br/>
-                        <img src="static/robot.png" style="max-width: 300px; max-height: 500px; border: none;" alt="left parsed to right"/>
+                        <img id="robot" src="static/robot.png" style="max-width: 300px; max-height: 500px; border: none;" alt="left parsed to right"/>
                         <br/>
                     </div>
                 </div>
