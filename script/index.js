@@ -9,7 +9,7 @@ const add_cards = (cat, amount) =>{
     `
     $("#suggestion-colon").append(text);
 
-} 
+}
 
 
 

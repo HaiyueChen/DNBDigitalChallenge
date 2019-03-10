@@ -1,15 +1,17 @@
 from flask import Flask
 from flask import request
 from flask_cors import CORS
-from dnb_res_handler import Dnb_res_handler
-from dnb_res_handler import Customer
-from mock import mock_single_month
-
-from calculations import calculate_saving
 
 import json
 import os
+from datetime import datetime
 from taggun.taggun import *
+
+from dnb_res_handler import Dnb_res_handler
+from dnb_res_handler import Customer
+from mock import mock_single_month
+from calculations import calculate_saving
+
 
 app = Flask(__name__)
 CORS(app)
@@ -93,8 +95,18 @@ def calc_savings():
     if os.path.isfile("./temp.json"):
         f = open("temp.json")
         data = json.load(f)
-        # print(json.dumps(calculate_saving(data)))
-        return json.dumps(calculate_saving(data))
+        amount = float(request.args.get("amount"))
+        date_string = request.args.get("date")
+        print(amount, date_string)
+
+        date_format =  "%m/%d/%Y"
+        due_date = datetime.strptime(date_string, date_format)
+        now = datetime.now()
+        nr_of_dates =  due_date - now       
+        print(nr_of_dates.days)
+        
+        
+        return json.dumps(calculate_saving(data, amount, int(nr_of_dates)))
     else:
         return "Error"
 
@@ -112,7 +124,6 @@ def parseImg():
     f = open(filepath, 'wb')
     f.write(data)
     f.close()
-
 
     try:
         data = get_image_data(filepath, item_count+1)
