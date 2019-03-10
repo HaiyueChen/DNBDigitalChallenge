@@ -33,7 +33,7 @@ def compare_spending_habits(category_name, normal_spending, customer_spending):
             if customer_spending[i]["name"] == normal_spending[j]["name"]:
                 cat["name"] = customer_spending[i]["name"]
                 if customer_spending[i]["size"] > normal_spending[j]["size"]:
-                    print("PRINT DIF",customer_spending[i]["size"], normal_spending[j]["size"])
+                    # print("PRINT DIF",customer_spending[i]["size"], normal_spending[j]["size"])
                     cat["size"] = abs(round(customer_spending[i]["size"]-normal_spending[j]["size"], 2))
                 else:
                     cat["size"] = 0.0
@@ -52,7 +52,7 @@ def total_consumption(data):
         category = categories[i]
 
         if not category["children"]:
-            print(category["size"])
+            # print(category["size"])
             spendings += category["size"]
         else:
             pass

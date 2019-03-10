@@ -93,7 +93,8 @@ def calc_savings():
     if os.path.isfile("./temp.json"):
         f = open("temp.json")
         data = json.load(f)
-        return str(calculate_saving(data))
+        # print(json.dumps(calculate_saving(data)))
+        return json.dumps(calculate_saving(data))
     else:
         return "Error"
 
@@ -143,7 +144,7 @@ def add_mat_og_drikke(d, json_data):
 def saveJson():
     data = request.get_data()
     data = json.loads(data)
-    print(data)
+    # print(data)
 
     if not os.path.isfile("./temp.json"):
         return json.dumps({'success' : False, 'description' : 'Unable to find temp.json'})    
