@@ -1,9 +1,9 @@
 const add_cards = (cat, amount) =>{
     let text = `
     <div class="card suggestion-cards bg-light" style="width: 15rem;">
-        <div class="card-body">
+        <div class="card-body suggestion-cards-body">
             <h5 class="card-title">${cat}</h5>
-            <p class="card-text">${amount}</p>
+            <p class="card-text">- ${amount} kr</p>
         </div>
     </div>
     `

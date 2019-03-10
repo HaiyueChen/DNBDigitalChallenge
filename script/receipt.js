@@ -45,7 +45,7 @@ var parseImg = async function (files) {
 
                         let item_name = "Plommer 0.100kg x kr 49,00";
                         var text = `
-                            <div class="card suggestion-cards bg-light" style="width: 18rem;">
+                            <div class="card suggestion-cards bg-light" style="width: 18rem; padding: 1rem">
                                 <div class="card-body">
                                     <h5 class="card-title">${item_name}</h5>
                                     <p class="card-text">Nok ${data.data[key]['size']}</p>
