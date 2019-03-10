@@ -38,25 +38,22 @@
     <div class="container-fluid" style="height:100%">
             <div class="row mt-4" style="height:100%">
                 <div class="col-md-4" id="file-container" style="height: 100%">
-                    <div id="file-card" class="bg-light">
+                    <div id="file-card" class="bg-light" hidden="hidden">
                         <div id="img-container">
                             <img id="output" style="max-width: 300px; max-height: 500px; border: none;"/>
-
                         </div>
                         <div id="file-input-container">
-                           
-                            <input id="file_input" type="file" accept="image/*" onchange="loadFile(event)" style="float:right">
                             <button id="remove" class="btn-danger" hidden="hidden" type="button" onclick="remove(event)" style="float:right; margin-right:1em;">Remove image</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <input id="file_input" type="file" accept="image/*" onchange="loadFile(event)" style="float:right">
-                    <br/>
-                    <div id="arrow-container">
+                    <div class="inline-block" id="arrow-container">
+                        <input id="file_input" type="file" accept="image/*" style="display:none;" onchange="loadFile(event)">
+                        <input type="button" style="margin-left:60px;margin-bottom:50px;" value="Add receipt" onclick="document.getElementById('file_input').click();" />
                         <br/>
                         <img src="static/robot.png" style="max-width: 300px; max-height: 500px; border: none;" alt="left parsed to right"/>
-
+                        <br/>
                     </div>
                 </div>
                 <div class="col" id="item-colon">
@@ -66,12 +63,10 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <button class="btn-success" id="add-receit-button" onclick="returnJson()" >Add receipt items</button>
+                            <button class="btn-success" style="margin-left:50px;margin-top:50px" id="add-receipt-button" hidden="hidden" onclick="returnJson()">Add receipt items</button>
                         </div>
                     </div>
-
                 </div>
-                
             </div>
     </div>
 </body>
