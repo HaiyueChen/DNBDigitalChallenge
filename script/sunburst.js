@@ -78,7 +78,14 @@ url => {
                 .attr("dy", "0.4em")
                 .attr("fill-opacity", d => +labelVisible(d.current))
                 .attr("transform", d => labelTransform(d.current))
-                .text(d => d.data.name)
+                .text(d => {
+                        if(d.data.name.length > 18){
+                            return d.data.name.substring(0, 18);
+                        }
+                        else{
+                            return d.data.name;
+                        }
+                    })
                 .style("font-size", "12px");
 
 
