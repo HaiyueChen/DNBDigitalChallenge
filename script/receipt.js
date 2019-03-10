@@ -1,9 +1,11 @@
 var loadFile = function (event) {
-    console.log(event.target.files);
     this.parseImg(event.target.files);
+    
+    var addFileButton = document.getElementById('add-file-button');
+    addFileButton.hidden = true;
+    
+    document.getElementById('add-receipt-button').hidden = true;
 
-    var input = document.getElementById('file_input');
-    input.hidden = true;
 
     var remove = document.getElementById('remove');
     remove.hidden = false;
@@ -13,9 +15,9 @@ var loadFile = function (event) {
 };
 
 var remove = function (event) {
+    document.getElementById('add-file-button').hidden = false;
     var input = document.getElementById('file_input');
     input.value = '';
-    input.hidden = false;
 
     var remove = document.getElementById('remove');
     remove.hidden = true;
