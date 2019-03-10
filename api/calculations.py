@@ -52,7 +52,7 @@ def compare_spending_habits(category_name, normal_spending, customer_spending, s
             value = 0.0
             for j in range(len(normal_children)):
 
-                if customer_children[i]["name"] == "COKE":
+                if "COLA" in customer_children[i]["name"].upper() :
                     cat["name"] = customer_children[i]["name"]
                     value = round(customer_children[i]["size"]-normal_children[j]["size"], 2)
                     cat["size"] = value

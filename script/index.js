@@ -35,14 +35,15 @@ $(document).ready(
                 )
                 .then(
                     data => {
+                        console.log(data);
                         for (let index = 0; index < data.length; index++) {
                             const cat = data[index];
                             for (const key in cat["children"]) {
                                 let element = cat["children"][key];
                                 let amount = element["size"];
-                                if(amount > 0){
+                                if(Math.abs(amount) > 0){
                                     let name = element["name"];
-                                    add_cards(name, amount);
+                                    add_cards(name, Math.abs(amount));
                                 }
                             }
                         }
