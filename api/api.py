@@ -5,6 +5,7 @@ from flask_cors import CORS
 import json
 import os
 from datetime import datetime
+from datetime import timedelta
 from taggun.taggun import *
 
 from dnb_res_handler import Dnb_res_handler
@@ -102,8 +103,8 @@ def calc_savings():
         date_format =  "%m/%d/%Y"
         due_date = datetime.strptime(date_string, date_format)
         now = datetime.now()
-        nr_of_dates =  due_date - now       
-        print(nr_of_dates.days)
+        nr_of_dates =  (due_date - now) /  timedelta(days=1)       
+        print(int(nr_of_dates))
         
         
         return json.dumps(calculate_saving(data, amount, int(nr_of_dates)))
